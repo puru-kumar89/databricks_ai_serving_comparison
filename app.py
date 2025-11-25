@@ -12,17 +12,46 @@ page_ icon=" ",
 layout="wide"
 )
 # ============================================================================
-# CIBC COLORS - Dark Mode Only
+# THEME SETTINGS
 # ============================================================================
-RED_PRIMARY = "#ED1B2E"
-RED_DARK = "#C8102E"
-RED_LIGHT = "#FF5252"
-ORANGE = "#FF6B35"
-GOLD = "#FFB800"
-GRAY_DARK = "#1A1A1A"
-GRAY_MED = "#2D2D2D"
-GRAY_LIGHT = "#CCCCCC"
-WHITE = "#FFFFFF"
+if 'theme' not in st.session_state:
+    st.session_state.theme = 'dark'
+
+def toggle_theme():
+    if st.session_state.theme == 'dark':
+        st.session_state.theme = 'light'
+    else:
+        st.session_state.theme = 'dark'
+
+with st.sidebar:
+    st.markdown("## Theme")
+    st.toggle("Light Mode", value=(st.session_state.theme == 'light'), on_change=toggle_theme)
+
+# ============================================================================
+# CIBC COLORS
+# ============================================================================
+if st.session_state.theme == 'light':
+    RED_PRIMARY = "#ED1B2E"
+    RED_DARK = "#C8102E"
+    RED_LIGHT = "#FF5252"
+    ORANGE = "#FF6B35"
+    GOLD = "#FFB800"
+    GRAY_DARK = "#FFFFFF"
+    GRAY_MED = "#F0F2F6"
+    GRAY_LIGHT = "#31333F"
+    WHITE = "#000000"
+    PLOTLY_TEMPLATE = 'plotly_white'
+else:
+    RED_PRIMARY = "#ED1B2E"
+    RED_DARK = "#C8102E"
+    RED_LIGHT = "#FF5252"
+    ORANGE = "#FF6B35"
+    GOLD = "#FFB800"
+    GRAY_DARK = "#1A1A1A"
+    GRAY_MED = "#2D2D2D"
+    GRAY_LIGHT = "#CCCCCC"
+    WHITE = "#FFFFFF"
+    PLOTLY_TEMPLATE = 'plotly_dark'
 # ============================================================================
 # SESSION STATE
 # ============================================================================
